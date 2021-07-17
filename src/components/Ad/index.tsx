@@ -1,16 +1,9 @@
 import React, { useContext, useEffect } from "react";
 
+import { AdComponent } from "../../types";
+
 import { AdsContext } from "../../contexts/ads";
 import { dfp } from "../../apis/dfp";
-
-type AdComponent = React.FC<AdProps>;
-type AdProps = {
-  id: string;
-  style: any;
-  width: number;
-  height: number;
-  className: string;
-};
 
 export const Ad: AdComponent = ({
   id,

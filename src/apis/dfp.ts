@@ -1,3 +1,5 @@
+import { AdItem } from "../types";
+
 const REFRESH_KEY = "refresh";
 const REFRESH_VALUE = "true";
 
@@ -10,7 +12,7 @@ export const dfp = {
 
     googletag.openConsole();
   },
-  createSlots: (ads: any[], enableLazyload) => {
+  createSlots: (ads: AdItem[], enableLazyload: boolean) => {
     const googletag = (window as any).googletag;
 
     googletag.cmd.push(() => {

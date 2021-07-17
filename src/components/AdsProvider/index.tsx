@@ -2,22 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
+import { AdsProviderComponent } from "../../types";
+
 import { AdsContext } from "../../contexts/ads";
 import { dfp } from "../../apis/dfp";
-
-type Ad = {
-  divId: string;
-  slotId: string;
-  // TODO: define diferent capabilities for sizeMappings
-  sizeMappings: any;
-};
-
-type AdsProviderComponent = React.FC<AdsProviderProps>;
-type AdsProviderProps = {
-  ads: Ad[];
-  debug?: boolean;
-  enableLazyload?: boolean;
-};
 
 export const AdsProvider: AdsProviderComponent = ({
   ads,
