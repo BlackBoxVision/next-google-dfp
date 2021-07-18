@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { AdComponent } from "../../types";
 
-import { AdsContext } from "../../contexts/ads";
+import { useAdsContext } from "../../contexts/ads";
 import { dfp } from "../../apis/dfp";
 
 export const Ad: AdComponent = ({
@@ -12,7 +12,7 @@ export const Ad: AdComponent = ({
   width = 350,
   height = 250,
 }) => {
-  const { isLoading } = useContext(AdsContext);
+  const { isLoading } = useAdsContext();
 
   useEffect(() => {
     if (!isLoading && !!id) {

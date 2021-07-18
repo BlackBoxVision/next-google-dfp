@@ -6,59 +6,62 @@ const REFRESH_VALUE = "true";
 // Number of seconds to wait after the slot becomes viewable.
 const SECONDS_TO_WAIT_AFTER_VIEWABILITY = 60;
 
+const googleTag = () => {
+  const global = window as any;
+
+  global.googletag = global.googletag || {};
+  global.googletag.cmd = global.googletag.cmd || [];
+
+  return global.googletag;
+};
+
 export const dfp = {
   openConsole: () => {
-    const googletag = (window as any).googletag;
-
-    googletag.openConsole();
+    googleTag().openConsole();
   },
   createSlots: (ads: AdItem[], enableLazyload: boolean) => {
-    const googletag = (window as any).googletag;
-
-    googletag.cmd.push(() => {
-      ads.forEach(({ slotId, divId, sizeMappings }: any) => {
+    googleTag().cmd.push(() => {
+      ads.forEach(({ slotId, divId, sizeMappings }: AdItem) => {
         // TODO: define size mappings
 
-        googletag
+        googleTag()
           .defineSlot(slotId, [728, 90], divId)
           .setTargeting(REFRESH_KEY, REFRESH_VALUE)
-          .addService(googletag.pubads());
+          .addService(googleTag().pubads());
       });
 
-      googletag.pubads().addEventListener("impressionViewable", (event) => {
-        const slot = event.slot;
+      googleTag()
+        .pubads()
+        .addEventListener("impressionViewable", (event) => {
+          const slot = event.slot;
 
-        if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
-          setTimeout(() => {
-            googletag.pubads().refresh([slot]);
-          }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
-        }
-      });
+          if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
+            setTimeout(() => {
+              googleTag().pubads().refresh([slot]);
+            }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
+          }
+        });
 
       if (!!enableLazyload) {
         // Enable lazyload with some good defaults
-        googletag.pubads().enableLazyLoad({
+        googleTag().pubads().enableLazyLoad({
           fetchMarginPercent: 500,
           renderMarginPercent: 200,
           mobileScaling: 2.0,
         });
       }
 
-      googletag.enableServices();
+      googleTag().enableServices();
     });
   },
   showSlot: (divId: string) => {
-    const googletag = (window as any).googletag;
-
-    googletag.cmd.push(() => {
-      googletag.display(divId);
+    googleTag().cmd.push(() => {
+      googleTag().display(divId);
     });
   },
   removeSlots: () => {
-    const googletag = (window as any).googletag;
-
-    googletag.cmd.push(() => {
-      googletag.destroySlots();
+    googleTag().cmd.push(() => {
+      googleTag().destroySlots();
     });
   },
 };

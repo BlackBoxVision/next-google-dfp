@@ -7,6 +7,12 @@ export type AdItem = {
   sizeMappings: any;
 };
 
+// Context
+
+export type AdsContextValue = null | {
+  isLoading: boolean;
+};
+
 // Components
 
 type AdsProviderProps = {
