@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;
 ```
 
 ### Add an Ad in your page
@@ -51,9 +51,11 @@ export default MyApp
 ```js
 import { Ad } from "@blackbox-vision/next-google-dfp";
 
-export default function Page() {
+function Page() {
   return <Ad id="banner-ad" width={300} height={250} />;
 }
+
+export default Page;
 ```
 
 // TODO: add props, add support for more cases, show targeting support
