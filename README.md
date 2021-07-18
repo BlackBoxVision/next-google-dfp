@@ -1,4 +1,4 @@
-# Next Google DFP
+# Next Google DFP [![npm version](https://badge.fury.io/js/%40blackbox-vision%2Fnext-google-dfp.svg)](https://badge.fury.io/js/%40blackbox-vision%2Fnext-google-dfp) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 🚀 Integrate Google Double Click for Publishers in Next.js with ease
 
