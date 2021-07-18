@@ -32,17 +32,15 @@ export const ads = [
 
 ### Add a Provider in Custom App
 
-```diff
-// _app.tsx|js
-+ import { AdsProvider } from "@blackbox-vision/next-google-dfp";
+```ts
+import { AdsProvider } from "@blackbox-vision/next-google-dfp";
 
 function MyApp({ Component, pageProps }) {
--  return <Component {...pageProps} />
-+  return (
-+    <AdsProvider ads={ads} enableLazyload>
-+      <Component {...pageProps} />
-+    </AdsProvider>
-+  );
+  return (
+    <AdsProvider ads={ads} enableLazyload>
+      <Component {...pageProps} />
+    </AdsProvider>
+  );
 }
 
 export default MyApp
