@@ -35,6 +35,8 @@ export const ads = [
 ```ts
 import { AdsProvider } from "@blackbox-vision/next-google-dfp";
 
+import { ads } from "../constants/ads";
+
 function MyApp({ Component, pageProps }) {
   return (
     <AdsProvider ads={ads} enableLazyload>
