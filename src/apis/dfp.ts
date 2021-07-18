@@ -22,12 +22,38 @@ export const dfp = {
   createSlots: (ads: AdItem[], enableLazyload: boolean) => {
     googleTag().cmd.push(() => {
       ads.forEach(({ slotId, divId, sizeMappings }: AdItem) => {
-        // TODO: define size mappings
+        let responsiveMappings: any = null;
+        let mappings: any = sizeMappings;
 
-        googleTag()
-          .defineSlot(slotId, [728, 90], divId)
+        if (sizeMappings.length > 0) {
+          const [first]: any = sizeMappings;
+
+          if (
+            typeof first === "object" &&
+            !!first.breakpoint &&
+            !!first.sizes
+          ) {
+            const sizeMapping = googleTag().sizeMapping();
+
+            mappings = [];
+
+            sizeMappings.forEach(({ breakpoint, sizes }: any) => {
+              sizeMapping.addSize(breakpoint, sizes);
+              mappings.push(sizes);
+            });
+
+            responsiveMappings = sizeMapping.build();
+          }
+        }
+
+        const slot = googleTag()
+          .defineSlot(slotId, mappings, divId)
           .setTargeting(REFRESH_KEY, REFRESH_VALUE)
           .addService(googleTag().pubads());
+
+        if (!!responsiveMappings) {
+          slot.defineSizeMapping(responsiveMappings);
+        }
       });
 
       googleTag()

@@ -1,10 +1,18 @@
 import React from "react";
 
+export type FluidItem = ["fluid"];
+export type SizeItem = [width: number, height: number];
+export type ResponsiveItem = {
+  breakpoint: SizeItem;
+  sizes: SizeItem | SizeItem[];
+};
+
+export type SizeMappings = FluidItem | SizeItem | SizeItem[] | ResponsiveItem[];
+
 export type AdItem = {
   divId: string;
   slotId: string;
-  // TODO: define diferent capabilities for sizeMappings
-  sizeMappings: any;
+  sizeMappings: SizeMappings;
 };
 
 // Context
