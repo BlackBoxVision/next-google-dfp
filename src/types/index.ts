@@ -1,7 +1,7 @@
 import React from "react";
 
 export type FluidItem = ["fluid"];
-export type SizeItem = [width: number, height: number];
+export type SizeItem = [number, number];
 export type ResponsiveItem = {
   breakpoint: SizeItem;
   sizes: SizeItem | SizeItem[];
