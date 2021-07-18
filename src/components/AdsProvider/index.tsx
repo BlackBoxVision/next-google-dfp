@@ -11,7 +11,7 @@ export const AdsProvider: AdsProviderComponent = ({
   ads,
   children,
   debug = false,
-  enableLazyload = false,
+  enableLazyload = true,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
