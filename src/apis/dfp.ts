@@ -26,12 +26,12 @@ export const dfp = {
         let mappings: any = sizeMappings;
 
         if (sizeMappings.length > 0) {
-          const [first]: any = sizeMappings;
+          const [firstSizeMapping]: any = sizeMappings;
 
           if (
-            typeof first === "object" &&
-            !!first.breakpoint &&
-            !!first.sizes
+            typeof firstSizeMapping === "object" &&
+            !!firstSizeMapping.breakpoint &&
+            !!firstSizeMapping.sizes
           ) {
             const sizeMapping = googleTag().sizeMapping();
 
@@ -39,7 +39,14 @@ export const dfp = {
 
             sizeMappings.forEach(({ breakpoint, sizes }: any) => {
               sizeMapping.addSize(breakpoint, sizes);
-              mappings.push(sizes);
+
+              const [firstSize] = sizes;
+
+              if (!!firstSize && Array.isArray(firstSize)) {
+                mappings.push(...sizes);
+              } else {
+                mappings.push(sizes);
+              }
             });
 
             responsiveMappings = sizeMapping.build();
