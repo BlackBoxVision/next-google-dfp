@@ -18,6 +18,8 @@ const googleTag = () => {
 export const dfp = {
   createSlots: (ads: AdItem[], enableLazyload: boolean) => {
     googleTag().cmd.push(() => {
+      googleTag().pubads().collapseEmptyDivs();
+
       ads.forEach(({ slotId, divId, sizeMappings }: AdItem) => {
         let responsiveMappings: any = null;
         let mappings: any = sizeMappings;
