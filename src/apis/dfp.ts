@@ -17,7 +17,15 @@ const googleTag = () => {
 
 export const dfp = {
   openConsole: () => {
-    googleTag().openConsole();
+    const googletag: any = googleTag();
+
+    const intervalId = setInterval(() => {
+      if (!!googletag.apiReady) {
+        googletag.openConsole();
+
+        clearInterval(intervalId);
+      }
+    }, 500);
   },
   createSlots: (ads: AdItem[], enableLazyload: boolean) => {
     googleTag().cmd.push(() => {
