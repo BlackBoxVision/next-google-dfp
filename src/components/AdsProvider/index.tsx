@@ -30,7 +30,7 @@ export const AdsProvider: AdsProviderComponent = ({
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
 
-    if (!!debug) {
+    if (!!debug && !searchParams.has("google_console")) {
       searchParams.append("google_console", "1");
       window.location = `${window.location.pathname}?${searchParams}` as any;
     }
