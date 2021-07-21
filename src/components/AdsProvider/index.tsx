@@ -28,9 +28,17 @@ export const AdsProvider: AdsProviderComponent = ({
 
   // Enable debug console if possible
   useEffect(() => {
-    if (debug) {
-      dfp.openConsole();
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (!!debug) {
+      searchParams.append("google_console", "1");
     }
+
+    if (!debug && searchParams.has("google_console")) {
+      searchParams.delete("google_console");
+    }
+
+    window.location = `${window.location.pathname}?${searchParams}` as any;
   }, [debug]);
 
   // Track route changes to re-render all slots
