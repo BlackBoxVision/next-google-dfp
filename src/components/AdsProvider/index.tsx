@@ -32,13 +32,15 @@ export const AdsProvider: AdsProviderComponent = ({
 
     if (!!debug) {
       searchParams.append("google_console", "1");
+      window.location = `${window.location.pathname}?${searchParams}` as any;
     }
 
     if (!debug && searchParams.has("google_console")) {
       searchParams.delete("google_console");
-    }
 
-    window.location = `${window.location.pathname}?${searchParams}` as any;
+      const search = `${searchParams}`.length > 0 ? `?${searchParams}` : "";
+      window.location = `${window.location.pathname}${search}` as any;
+    }
   }, [debug]);
 
   // Track route changes to re-render all slots
