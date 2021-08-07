@@ -13,13 +13,15 @@ export const AdsProvider: AdsProviderComponent = ({
   debug = false,
   enableLazyload = true,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
   // Create ad slots
   useEffect(() => {
     dfp.createSlots(ads, enableLazyload);
+
+    setIsLoading(false);
 
     return () => {
       dfp.removeSlots();
