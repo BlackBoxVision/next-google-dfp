@@ -13,20 +13,38 @@ export const AdsProvider: AdsProviderComponent = ({
   debug = false,
   enableLazyload = true,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   // Create ad slots
   useEffect(() => {
+    setIsLoading(true);
+
     dfp.createSlots(ads, enableLazyload);
 
     setIsLoading(false);
 
-    return () => {
-      dfp.removeSlots();
+    const handleRouteChangeStart = (url) => {
+      if (window.location.pathname !== url) {
+        setIsLoading(true);
+        dfp.removeSlots();
+        dfp.createSlots(ads, enableLazyload);
+      }
     };
-  }, [enableLazyload]);
+
+    const handleRouteChangeComplete = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [ads, enableLazyload]);
 
   // Enable debug console if possible
   useEffect(() => {
@@ -44,26 +62,6 @@ export const AdsProvider: AdsProviderComponent = ({
       window.location = `${window.location.pathname}${search}` as any;
     }
   }, [debug]);
-
-  // Track route changes to re-render all slots
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      setIsLoading(true);
-      dfp.removeSlots();
-    };
-
-    const handleRouteChangeComplete = () => {
-      setIsLoading(false);
-    };
-
-    router.events.on("routeChangeStart", handleRouteChangeStart);
-    router.events.on("routeChangeComplete", handleRouteChangeComplete);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChangeStart);
-      router.events.off("routeChangeComplete", handleRouteChangeComplete);
-    };
-  }, []);
 
   return (
     <>
