@@ -13,7 +13,7 @@ export const AdsProvider: AdsProviderComponent = ({
   debug = false,
   enableLazyload = true,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
