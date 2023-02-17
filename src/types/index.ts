@@ -33,8 +33,8 @@ export type AdsProviderComponent = React.FC<AdsProviderProps>;
 
 type AdProps = {
   id: string;
-  style: any;
-  className: string;
+  style?: any;
+  className?: string;
   width: number | string;
   height: number | string;
 };
