@@ -12,6 +12,7 @@ export const AdsProvider: AdsProviderComponent = ({
   children,
   debug = false,
   enableLazyload = true,
+  enableRefresh = true, // new prop to enable/disable refresh
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +22,7 @@ export const AdsProvider: AdsProviderComponent = ({
   useEffect(() => {
     setIsLoading(true);
 
-    dfp.createSlots(ads, enableLazyload);
+    dfp.createSlots(ads, enableLazyload, enableRefresh);
 
     setIsLoading(false);
 
@@ -29,7 +30,7 @@ export const AdsProvider: AdsProviderComponent = ({
       if (window.location.pathname !== url) {
         setIsLoading(true);
         dfp.removeSlots();
-        dfp.createSlots(ads, enableLazyload);
+        dfp.createSlots(ads, enableLazyload, enableRefresh); // pass enableRefresh prop to createSlots()
       }
     };
 
@@ -44,7 +45,7 @@ export const AdsProvider: AdsProviderComponent = ({
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
-  }, [ads, enableLazyload]);
+  }, [ads, enableLazyload, enableRefresh]);
 
   // Enable debug console if possible
   useEffect(() => {

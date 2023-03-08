@@ -27,13 +27,14 @@ type AdsProviderProps = {
   ads: AdItem[];
   debug?: boolean;
   enableLazyload?: boolean;
+  enableRefresh?: boolean;
 };
 
 export type AdsProviderComponent = React.FC<AdsProviderProps>;
 
 type AdProps = {
   id: string;
-  style?: any;
+  style?: object;
   className?: string;
   width: number | string;
   height: number | string;
