@@ -12,7 +12,7 @@ export const AdsProvider: AdsProviderComponent = ({
   children,
   debug = false,
   enableLazyload = true,
-  enableRefresh = true, // new prop to enable/disable refresh
+  enableRefresh = true
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,7 +30,7 @@ export const AdsProvider: AdsProviderComponent = ({
       if (window.location.pathname !== url) {
         setIsLoading(true);
         dfp.removeSlots();
-        dfp.createSlots(ads, enableLazyload, enableRefresh); // pass enableRefresh prop to createSlots()
+        dfp.createSlots(ads, enableLazyload, enableRefresh);
       }
     };
 
