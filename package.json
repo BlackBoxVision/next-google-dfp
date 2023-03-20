@@ -33,8 +33,8 @@
     "typescript": "^3.9.7"
   },
   "peerDependencies": {
-    "react": "^16.11.0",
-    "next": "^11.0.0"
+    "react": ">=16.11.0",
+    "next": ">=11.0.0"
   },
   "@pika/pack": {
     "pipeline": [
