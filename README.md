@@ -69,22 +69,22 @@ export const ads = [
   {
     slotId: "/6355419/Travel/Europe/France/Paris",
     sizeMappings: [
-			{
-				breakpoint: [1024, 768],
-				sizes: [
-					[980, 90],
-					[980, 250],
-					[728, 90],
-				],
-			}, //viewport >1024px
-			{
-				breakpoint: [0, 0],
-				sizes: [
-					[320, 100],
-					[320, 50],
-				],
-			}, //viewport <1024px
-		],
+      {
+        breakpoint: [1024, 768],
+        sizes: [
+          [980, 90],
+          [980, 250],
+          [728, 90],
+        ],
+      }, //viewport >1024px
+      {
+        breakpoint: [0, 0],
+        sizes: [
+          [320, 100],
+          [320, 50],
+        ],
+      }, //viewport <1024px
+    ],
     divId: "banner-ad",
   },
 ];
