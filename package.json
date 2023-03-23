@@ -1,6 +1,6 @@
 {
   "name": "@blackbox-vision/next-google-dfp",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "Integrate Google DFP in next.js with ease",
   "author": "JonatanSalas <jonatan.salas@blackbox-vision.tech>",
   "homepage": "https://github.com/BlackBoxVision/next-google-dfp#readme",
@@ -33,8 +33,8 @@
     "typescript": "^3.9.7"
   },
   "peerDependencies": {
-    "react": "^16.11.0",
-    "next": "^11.0.0"
+    "react": ">=16.11.0",
+    "next": ">=11.0.0"
   },
   "@pika/pack": {
     "pipeline": [
