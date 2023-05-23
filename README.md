@@ -60,4 +60,34 @@ function Page() {
 export default Page;
 ```
 
+## Responsive Ad Slots
+
+Responsive slots can be defined with this structure:
+
+```js
+export const ads = [
+  {
+    slotId: "/6355419/Travel/Europe/France/Paris",
+    sizeMappings: [
+      {
+        breakpoint: [1024, 768],
+        sizes: [
+          [980, 90],
+          [980, 250],
+          [728, 90],
+        ],
+      }, //viewport >1024px
+      {
+        breakpoint: [0, 0],
+        sizes: [
+          [320, 100],
+          [320, 50],
+        ],
+      }, //viewport <1024px
+    ],
+    divId: "banner-ad",
+  },
+];
+```
+
 // TODO: add props, add support for more cases, show targeting support
