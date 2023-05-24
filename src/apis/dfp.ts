@@ -16,7 +16,7 @@ const googleTag = () => {
 };
 
 export const dfp = {
-  createSlots: (ads: AdItem[], enableLazyload: boolean) => {
+  createSlots: (ads: AdItem[], enableLazyload: boolean, enableRefresh: boolean = true) => {
     googleTag().cmd.push(() => {
       googleTag().pubads().collapseEmptyDivs();
 
@@ -62,17 +62,19 @@ export const dfp = {
         }
       });
 
-      googleTag()
-        .pubads()
-        .addEventListener("impressionViewable", (event) => {
-          const slot = event.slot;
+      if (enableRefresh) {
+        googleTag()
+          .pubads()
+          .addEventListener("impressionViewable", (event) => {
+            const slot = event.slot;
 
-          if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
-            setTimeout(() => {
-              googleTag().pubads().refresh([slot]);
-            }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
-          }
-        });
+            if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
+              setTimeout(() => {
+                googleTag().pubads().refresh([slot]);
+              }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
+            }
+          });
+      }
 
       if (!!enableLazyload) {
         // Enable lazyload with some good defaults
