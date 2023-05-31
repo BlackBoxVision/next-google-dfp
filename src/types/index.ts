@@ -28,6 +28,7 @@ type AdsProviderProps = {
   debug?: boolean;
   enableLazyload?: boolean;
   enableRefresh?: boolean;
+  children: any;
 };
 
 export type AdsProviderComponent = React.FC<AdsProviderProps>;
