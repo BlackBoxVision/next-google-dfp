@@ -23,13 +23,12 @@ export type AdsContextValue = null | {
 
 // Components
 
-type AdsProviderProps = {
+type AdsProviderProps = React.PropsWithChildren<{
   ads: AdItem[];
   debug?: boolean;
   enableLazyload?: boolean;
   enableRefresh?: boolean;
-  children: any;
-};
+}>;
 
 export type AdsProviderComponent = React.FC<AdsProviderProps>;
 
